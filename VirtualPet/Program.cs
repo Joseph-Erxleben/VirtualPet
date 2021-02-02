@@ -8,6 +8,7 @@ namespace VirtualPet
         {
             Console.WriteLine("Hello! Welcome to Virtual Pets");
             Pet pet = new Pet();
+            Random random = new Random();
 
             bool keepPlaying = true;
             string playerChoice;
@@ -38,9 +39,18 @@ namespace VirtualPet
                         Console.WriteLine(pet.Name + " is a " + pet.Species);
                             break;
                     case "3":
-                        pet.Feed();
-                        Console.WriteLine("You fed " + pet.Name );
-                        Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);
+                        Console.WriteLine("What would you like to feed " + pet.Name + "?");
+                        string food = Console.ReadLine();
+                        if (random.Next(1, 100) < pet.Boredom)
+                        {
+                            Console.WriteLine(pet.Name + " doesnt't want your food.");
+                        }
+                        else
+                        {
+                            pet.Feed(food.ToLower());
+                            Console.WriteLine("You fed " + pet.Name );
+                            Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);
+                        }
                         break;
                     case "4":
                         pet.Play();
@@ -77,6 +87,29 @@ namespace VirtualPet
                        
                 Console.Clear();
                 pet.Tick();
+
+                if (pet.Health <= 0)
+                {
+                    Console.WriteLine(pet.Name.ToUpper() + " HAS DIED! YOU LOSE! :(" );
+                    keepPlaying = false;
+                }
+                else if (pet.Hunger > 100)
+                {
+                    
+                    pet.Hunger -= 10;
+                    Console.WriteLine(pet.Name + " got hungry and found some food on his own.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else if (pet.Boredom > 100)
+                {
+                    pet.Boredom -= 10;
+                    Console.WriteLine(pet.Name + " got bored and found a toy to play with.");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+
+
             }
 
         }

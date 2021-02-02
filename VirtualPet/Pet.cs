@@ -52,9 +52,32 @@ namespace VirtualPet
             return Health;
         }
 
-        public void Feed()
+        public void Feed(string food)
         {
-            Hunger -= 40;
+            switch (food)
+            {
+                case "fish":
+                    Console.WriteLine(Name + " loves fish!");
+                    Hunger -= 50;
+                    break;
+                case "mice":
+                    Console.WriteLine(Name + " likes mice.");
+                    Hunger -= 45;
+                    break;
+                case "hot dog":
+                    Console.WriteLine(Name + " kind of likes hot dogs.");
+                    Hunger -= 40;
+                    break;
+                case "poison":
+                    Console.WriteLine(Name + " does not like poison :(");
+                    Hunger -= 5;
+                    Health -= 50;
+                    break;
+                default:
+                    Hunger -= 40;
+                    break;
+            }
+            
         }
 
         public void SeeDoctor()
