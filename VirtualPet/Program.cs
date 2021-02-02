@@ -91,6 +91,7 @@ namespace VirtualPet
                 if (pet.Health <= 0)
                 {
                     Console.WriteLine(pet.Name.ToUpper() + " HAS DIED! YOU LOSE! :(" );
+                  
                     keepPlaying = false;
                 }
                 else if (pet.Hunger > 100)
@@ -108,6 +109,43 @@ namespace VirtualPet
                     Console.ReadKey();
                     Console.Clear();
                 }
+
+                if (pet.Health <= 0)
+                {
+                    Console.WriteLine(@"(\ _ /)");
+                    Console.WriteLine("(X - X)");
+                    Console.WriteLine("c(\")(\")");
+                }
+
+                else if (pet.Health < 20)
+                {
+                    Console.WriteLine(@"(\ _ /)");
+                    Console.WriteLine("(0 ~ 0)");
+                    Console.WriteLine("c(\")(\")");
+                }
+
+
+                else if (pet.Boredom > 80)
+                {
+                    Console.WriteLine(@"(\ _ /)");
+                    Console.WriteLine("(- X -)");
+                    Console.WriteLine("c(\")(\")");
+                }
+
+                else if (pet.Hunger > 80)
+                {
+                    Console.WriteLine(@"(\ _ /)");
+                    Console.WriteLine("(' O ')");
+                    Console.WriteLine("c(\")(\")");
+                }
+
+                else
+                {
+                    Console.WriteLine(@"(\ _ /)");
+                    Console.WriteLine("(' X ')");
+                    Console.WriteLine("c(\")(\")");
+                }
+               
 
 
             }
