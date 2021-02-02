@@ -39,11 +39,15 @@ namespace VirtualPet
                             break;
                     case "3":
                         pet.Feed();
-                        Console.WriteLine("You fed " + pet.Name);
+                        Console.WriteLine("You fed " + pet.Name );
+                        Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);
                         break;
                     case "4":
                         pet.Play();
                         Console.WriteLine("You played with " + pet.Name);
+                        Console.WriteLine(pet.Name + "s boredom level is " + pet.Boredom);
+                        Console.WriteLine(pet.Name + "s health level is " + pet.Health);
+                        Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);  
                         break;
                     case "5":
                         pet.SeeDoctor();
