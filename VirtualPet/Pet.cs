@@ -6,8 +6,8 @@ namespace VirtualPet
 {
     public class Pet
     {
-        public string Name { get; set; }
-        public string Species { get; set; }
+        public string Name { get; set; } = "your pet";
+        public string Species { get; set; } = "animal";
         public int Hunger { get; set; } = 50;
         public int Boredom { get; set; } = 60;
         public int Health { get; set; } = 30;
