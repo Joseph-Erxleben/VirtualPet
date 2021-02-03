@@ -100,7 +100,7 @@ namespace VirtualPet
             Health += 30;
         }
 
-        public void Play()
+        public virtual void Play()
         {
             Hunger += 10;
             Boredom -= 20;

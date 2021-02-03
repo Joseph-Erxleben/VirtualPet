@@ -6,17 +6,17 @@ namespace VirtualPet
 {
     public class Robotic : Pet
     {
-        public int Oil { get; set; } = 100;
+        public int Oil { get; set; } = 50;
         public int Performance { get; set; } = 100;
 
         public void GiveOil()
         {
-            Oil += 15;
+            Oil += 25;
         }
 
         public void PerformMaintenance()
         {
-            Performance += 15;
+            Performance += 40;
         }
 
         public override void Tick()
@@ -25,6 +25,12 @@ namespace VirtualPet
             Performance -= 5;
             Boredom += 5;
             
+        }
+        public override void Play()
+        {
+            Oil -= 15;
+            Performance -= 15;
+            Boredom -= 35;
         }
     }
 }

@@ -17,9 +17,9 @@ namespace VirtualPet.Tests
 
 
         [Fact]
-        public void Check_Oil_Is_100()
+        public void Check_Oil_Is_50()
         {
-            Assert.Equal(100, testRobotic.Oil);
+            Assert.Equal(50, testRobotic.Oil);
         }
 
         [Fact]
@@ -29,23 +29,23 @@ namespace VirtualPet.Tests
         }
 
         [Fact]
-        public void Give_Oil_Should_Increase_Oil_By_15()
+        public void Give_Oil_Should_Increase_Oil_By_25()
         {
             testRobotic.Oil = 0;
 
             testRobotic.GiveOil();
 
-            Assert.Equal(15, testRobotic.Oil);
+            Assert.Equal(25, testRobotic.Oil);
         }
 
         [Fact]
-        public void PerformMaintenance_Should_Increase_Performance_By_15()
+        public void PerformMaintenance_Should_Increase_Performance_By_40()
         {
             testRobotic.Performance = 0;
 
             testRobotic.PerformMaintenance();
 
-            Assert.Equal(15, testRobotic.Performance);
+            Assert.Equal(40, testRobotic.Performance);
         }
 
         [Fact]
@@ -76,6 +76,31 @@ namespace VirtualPet.Tests
             testRobotic.Tick();
 
             Assert.Equal(5, testRobotic.Boredom);
+        }
+
+        [Fact]
+
+        public void Play_Should_Update_Performance()
+        {
+            testRobotic.Performance = 100;
+            testRobotic.Play();
+            Assert.Equal(85, testRobotic.Performance);
+        }
+
+        [Fact]
+        public void Play_Should_Update_Boredom()
+        {
+            testRobotic.Boredom = 100;
+            testRobotic.Play();
+            Assert.Equal(65, testRobotic.Boredom);
+        }
+
+        [Fact]
+        public void Play_Should_Update_Oil()
+        {
+            testRobotic.Oil = 100;
+            testRobotic.Play();
+            Assert.Equal(85, testRobotic.Oil);
         }
     }
 }
