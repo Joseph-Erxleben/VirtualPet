@@ -107,7 +107,7 @@ namespace VirtualPet
             Health += 10;
         }
 
-        public void Tick()
+        public virtual void Tick()
         {
             Hunger += 5;
             Boredom += 5;
