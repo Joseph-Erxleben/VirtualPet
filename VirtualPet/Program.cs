@@ -44,18 +44,64 @@ namespace VirtualPet
                         break;
 
                     case "2":
+                        Console.WriteLine("What is the name of your pet?");
+                        string nameOfPet = Console.ReadLine();
+                        Console.WriteLine("What is the species of your pet?");
+                        string speciesOfPet = Console.ReadLine();
+                        Organic organic = new Organic(nameOfPet, speciesOfPet);
+                        shelter.AddPet(organic);
+                       
                         break;
 
                     case "3":
+                        Console.WriteLine("What is the name of your pet?");
+                        nameOfPet = Console.ReadLine();
+                        Console.WriteLine("What is the species of your pet?");
+                        speciesOfPet = Console.ReadLine();
+                        Robotic robotic = new Robotic(nameOfPet, speciesOfPet);
+                        shelter.AddPet(robotic);
                         break;
 
                     case "4":
+                        Console.WriteLine("Which pet would you like to adopt?");
+                        string userPet = Console.ReadLine();
+                        
+
+
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            string petInList = shelter.ListofPets[i].Name;
+
+                            if (userPet == petInList)
+                            {
+                                Console.WriteLine("You adopted " + petInList);
+                            }
+                            else
+                            {
+                                Console.WriteLine("We don't have any pets with that name");
+                            }
+
+                        }
+                        Console.ReadKey();
                         break;
 
                     case "5":
                         break;
 
                     case "6":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            if(shelter.ListofPets[i].IsOrganic == true)
+                            {
+                                Console.WriteLine(shelter.ListofPets[i].Name + " the organic " + shelter.ListofPets[i].Species);
+                            }
+                            else
+                            {
+                                Console.WriteLine(shelter.ListofPets[i].Name + " the robotic " + shelter.ListofPets[i].Species);
+                            }
+
+                        }
+                        Console.ReadKey();
                         break;
 
                     case "7":

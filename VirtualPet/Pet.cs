@@ -11,11 +11,12 @@ namespace VirtualPet
         public int Hunger { get; set; }
         public int Boredom { get; set; }
         public int Health { get; set; }
+        public bool IsOrganic { get; set; }
 
         public Pet()
         {
-            Name = "your pet";
-            Species = "animal";
+            //Name = "your pet";
+           // Species = "animal";
             Hunger = 50;
             Boredom = 60;
             Health = 30;
