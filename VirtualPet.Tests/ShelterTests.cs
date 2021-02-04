@@ -14,6 +14,7 @@ namespace VirtualPet.Tests
             testShelter = new Shelter();
         }
 
+        Pet newPet = new Pet();
         [Fact]
         public void Shelter_Should_Have_Name()
         {
@@ -26,6 +27,32 @@ namespace VirtualPet.Tests
         {
             testShelter.SetName("jasmine");
             Assert.Equal("jasmine", testShelter.Name);
+        }
+
+        [Fact]
+        public void ListofPets_Should_Return_1_Element()
+        {
+            testShelter.ListofPets.Add(newPet);
+            Assert.Single(testShelter.ListofPets);
+        }
+
+        [Fact]
+
+        public void AddPet_Should_Increase_ListofPets_by_1()
+        {
+            testShelter.AddPet(newPet);
+            Assert.Single(testShelter.ListofPets);
+        }
+
+        [Fact]
+        public void RemovePet_Should_Decrease_ListofPets_by_1()
+        {
+            testShelter.AddPet(newPet);
+            testShelter.AddPet(newPet);
+
+            testShelter.RemovePet(newPet);
+            Assert.Single(testShelter.ListofPets);
+            
         }
 
     }
