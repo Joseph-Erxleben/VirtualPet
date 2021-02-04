@@ -6,7 +6,7 @@ namespace VirtualPet
 {
     public class Shelter
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = "the";
 
         public void SetName(string name)
         {
