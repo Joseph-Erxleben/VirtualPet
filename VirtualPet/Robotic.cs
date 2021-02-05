@@ -27,6 +27,7 @@ namespace VirtualPet
 
         public void PerformMaintenance()
         {
+            Oil += 10;
             Performance += 40;
         }
 

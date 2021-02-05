@@ -65,17 +65,18 @@ namespace VirtualPet
                         Console.WriteLine("Which pet would you like to adopt?");
                         string userPet = Console.ReadLine();
 
-                        int petIndex = shelter.SelectPet(userPet);
+                        int userPetIndex = shelter.SelectPet(userPet);
 
-                        if(petIndex == -1)
+                        if (userPetIndex == -1)
                         {
-                            Console.WriteLine("We don't have any pets by that name");
+                            Console.WriteLine("That pet isn't listed in our records.");
                         }
+
                         else
                         {
-                            shelter.RemovePet(petIndex);
+                            shelter.RemovePet(userPetIndex);
                         }
-
+                        
                         Console.ReadKey();
                         break;
 
@@ -119,24 +120,144 @@ namespace VirtualPet
             }
 
 
+            void Kennel()
+            {
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("1. Feed all organic pets");
+                Console.WriteLine("2. Oil all robotic pets");
+                Console.WriteLine("3. Play with all pets");
+                Console.WriteLine("4. Take all organic pets to Doctor");
+                Console.WriteLine("5. Perform maintenence on all Robotic Pets");
+                Console.WriteLine("6. Interact with a single pet");
+                Console.WriteLine("7. Check all pet statuses");
+                Console.WriteLine("8. Return to Office");
+
+                playerChoice = Console.ReadLine();
+
+                switch (playerChoice)
+                { 
+                   
+                    case "1":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            if (shelter.ListofPets[i].IsOrganic == true)
+                            {
+                                shelter.ListofPets[i].Feed();
+                            }
+                        }
+                        Console.WriteLine("You fed the pets!");
+                        break;
+
+                    case "2":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            if (shelter.ListofPets[i].IsOrganic == false)
+                            {
+                                //shelter.ListofPets[i].GiveOil();
+                            }
+                        }
+                        Console.WriteLine("You oiled the pets!");
+                        break;
+
+                    case "3":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            shelter.ListofPets[i].Play();
+                        }
+                        Console.WriteLine("You played with the pets!");
+                        break;
+
+                    case "4":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            if (shelter.ListofPets[i].IsOrganic == true)
+                            {
+                                shelter.ListofPets[i].SeeDoctor();
+                            }
+                        }
+                        Console.WriteLine("You took the pets to the doctor!");
+                        break;
+
+                    case "5":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            if (shelter.ListofPets[i].IsOrganic == false)
+                            {
+                                //shelter.ListofPets[i].PerformMaintanance();
+                            }
+                        }
+                        Console.WriteLine("You repaired the pets!");
+                        break;
+
+                    case "6":
+
+                        Console.WriteLine("What pet do you want to interact with?");
+
+
+                        break;
+
+                    case "7":
+                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        {
+                            if (shelter.ListofPets[i].IsOrganic  == true)
+                            {
+                                Console.WriteLine($"{shelter.ListofPets[i].Name} the organic {shelter.ListofPets[i].Species}- Hunger: {shelter.ListofPets[i].Hunger} " +
+                                    $"Health: {shelter.ListofPets[i].Health} Boredom: {shelter.ListofPets[i].Boredom}");
+                            }
+                            else if (shelter.ListofPets[i].IsOrganic == false)
+                            {
+                                //Console.WriteLine($"{shelter.ListofPets[i].Name} the robotic {shelter.ListofPets[i].Species}- Oil: {shelter.ListofPets[i].Oil} " +
+                                    //$"Performance: {shelter.ListofPets[i].Performance} Boredom: {shelter.ListofPets[i].Boredom}");
+                            }
+                        }
+                        break;
+
+                    case "8":
+                        Console.WriteLine("Thank you for taking care of the pets.");
+                        returnToOffice = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("Please select a valid option");
+                        break;
+
+                }
+
+                Console.ReadKey();
+                Console.Clear();
+            }
+
+
 
                 
-                void Kennel()
+                void SinglePet()
                 {
 
+
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("1. Feed " + pet.Name);
-                    Console.WriteLine("2. Play with " + pet.Name);
-                    Console.WriteLine("3. Take " + pet.Name + " to Doctor");
-                    Console.WriteLine("4. Check " + pet.Name + "'s status");
-                    Console.WriteLine("5. Return to Office");
+                    Console.WriteLine("1. Name/Rename " + pet.Name);
+                    Console.WriteLine("2. Species/Set Species");
+                    Console.WriteLine("3. Feed " + pet.Name);
+                    Console.WriteLine("4. Play with " + pet.Name);
+                    Console.WriteLine("5. Take " + pet.Name + " to Doctor");
+                    Console.WriteLine("6. Check " + pet.Name + "'s status");
+                    Console.WriteLine("7. Return to Office");
                 
                     playerChoice = Console.ReadLine();
 
                     switch (playerChoice)
                     {
-                        
                         case "1":
+                            Console.WriteLine("What would you like you to name your pet?");
+                            pet.Name = Console.ReadLine();
+                            Console.WriteLine("You named your pet " + pet.Name);
+                            break;
+                        case "2":
+                            Console.WriteLine("What species do you want " + pet.Name + " to be?");
+                            pet.Species = Console.ReadLine();
+                            Console.WriteLine(pet.Name + " is a " + pet.Species);
+                                break;
+                        case "3":
                             Console.WriteLine("What would you like to feed " + pet.Name + "?");
                             string food = Console.ReadLine();
                             if (random.Next(1, 100) < pet.Boredom)
@@ -150,18 +271,18 @@ namespace VirtualPet
                                 Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);
                             }
                             break;
-                        case "2":
+                        case "4":
                             pet.Play();
                             Console.WriteLine("You played with " + pet.Name);
                             Console.WriteLine(pet.Name + "s boredom level is " + pet.Boredom);
                             Console.WriteLine(pet.Name + "s health level is " + pet.Health);
                             Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);  
                             break;
-                        case "3":
+                        case "5":
                             pet.SeeDoctor();
                             Console.WriteLine("You took " + pet.Name + " to the doctor.");
                             break;
-                        case "4":
+                        case "6":
                             Console.WriteLine(pet.Name);
                             Console.WriteLine(pet.Species);
                             Console.WriteLine("Hunger: " + pet.Hunger);
@@ -169,9 +290,9 @@ namespace VirtualPet
                             Console.WriteLine("Health: " + pet.Health);
 
                             break;
-                        case "5":
+                        case "7":
                             Console.WriteLine("Thank you for playing with " + pet.Name + "!");
-                            returnToOffice = true;
+                            
                             break;
 
                         default:

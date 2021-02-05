@@ -15,6 +15,8 @@ namespace VirtualPet
 
         
       public List<Pet> ListofPets = new List<Pet>();
+
+      public Pet Pet = new Pet();
        
       public void AddPet(Pet pet)
         {
@@ -43,6 +45,14 @@ namespace VirtualPet
 
             return petIndex;
 
+        }
+
+        public void Tick()
+        {
+            for (int i = 0; i < ListofPets.Count; i++)
+            {
+                Pet.Tick();
+            }
         }
     } 
 }
