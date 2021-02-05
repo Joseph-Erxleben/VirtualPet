@@ -9,6 +9,10 @@ namespace VirtualPet
         public int Oil { get; set; } = 50;
         public int Performance { get; set; } = 100;
 
+        public Robotic()
+        {
+
+        }
         public Robotic(string name, string species)
         {
             Name = name;

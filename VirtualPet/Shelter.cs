@@ -21,9 +21,28 @@ namespace VirtualPet
             ListofPets.Add(pet);
         }
 
-      public void RemovePet(Pet pet)
+      public void RemovePet(int index)
         {
-            ListofPets.Remove(pet);
+            ListofPets.RemoveAt(index);
+        }
+
+        public int SelectPet(string userPet)
+        {
+            int petIndex = -1;
+
+            for (int i = 0; i < ListofPets.Count; i++)
+            {
+                string petInList = ListofPets[i].Name;
+
+                if (userPet == petInList)
+                {
+                    Console.WriteLine(petInList + " has been adopted");
+                    petIndex = i;
+                }
+            }
+
+            return petIndex;
+
         }
     } 
 }

@@ -24,11 +24,10 @@ namespace VirtualPet
                 Console.WriteLine("1. Name/Re-Name Shelter");
                 Console.WriteLine("2. Add Organic Pet");
                 Console.WriteLine("3. Add Robotic Pet");
-                Console.WriteLine("4. Adopt Organic Pet");
-                Console.WriteLine("5. Adopt Robotic Pet");
-                Console.WriteLine("6. List Pets in Shelter");
-                Console.WriteLine("7. Enter the Kennel");
-                Console.WriteLine("8. Quit");
+                Console.WriteLine("4. Adopt a Pet");
+                Console.WriteLine("5. List Pets in Shelter");
+                Console.WriteLine("6. Enter the Kennel");
+                Console.WriteLine("7. Quit");
 
                 playerChoice = Console.ReadLine();
 
@@ -65,30 +64,22 @@ namespace VirtualPet
                     case "4":
                         Console.WriteLine("Which pet would you like to adopt?");
                         string userPet = Console.ReadLine();
-                        
 
+                        int petIndex = shelter.SelectPet(userPet);
 
-                        for (int i = 0; i < shelter.ListofPets.Count; i++)
+                        if(petIndex == -1)
                         {
-                            string petInList = shelter.ListofPets[i].Name;
-
-                            if (userPet == petInList)
-                            {
-                                Console.WriteLine("You adopted " + petInList);
-                            }
-                            else
-                            {
-                                Console.WriteLine("We don't have any pets with that name");
-                            }
-
+                            Console.WriteLine("We don't have any pets by that name");
                         }
+                        else
+                        {
+                            shelter.RemovePet(petIndex);
+                        }
+
                         Console.ReadKey();
                         break;
 
                     case "5":
-                        break;
-
-                    case "6":
                         for (int i = 0; i < shelter.ListofPets.Count; i++)
                         {
                             if(shelter.ListofPets[i].IsOrganic == true)
@@ -104,7 +95,7 @@ namespace VirtualPet
                         Console.ReadKey();
                         break;
 
-                    case "7":
+                    case "6":
 
                         returnToOffice = false;
                         while (returnToOffice == false)
@@ -114,7 +105,7 @@ namespace VirtualPet
 
                         break;
 
-                    case "8":
+                    case "7":
                         keepPlaying = false;
                         break;
 
@@ -133,31 +124,19 @@ namespace VirtualPet
                 void Kennel()
                 {
 
-
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("1. Name/Rename " + pet.Name);
-                    Console.WriteLine("2. Species/Set Species");
-                    Console.WriteLine("3. Feed " + pet.Name);
-                    Console.WriteLine("4. Play with " + pet.Name);
-                    Console.WriteLine("5. Take " + pet.Name + " to Doctor");
-                    Console.WriteLine("6. Check " + pet.Name + "'s status");
-                    Console.WriteLine("7. Return to Office");
+                    Console.WriteLine("1. Feed " + pet.Name);
+                    Console.WriteLine("2. Play with " + pet.Name);
+                    Console.WriteLine("3. Take " + pet.Name + " to Doctor");
+                    Console.WriteLine("4. Check " + pet.Name + "'s status");
+                    Console.WriteLine("5. Return to Office");
                 
                     playerChoice = Console.ReadLine();
 
                     switch (playerChoice)
                     {
+                        
                         case "1":
-                            Console.WriteLine("What would you like you to name your pet?");
-                            pet.Name = Console.ReadLine();
-                            Console.WriteLine("You named your pet " + pet.Name);
-                            break;
-                        case "2":
-                            Console.WriteLine("What species do you want " + pet.Name + " to be?");
-                            pet.Species = Console.ReadLine();
-                            Console.WriteLine(pet.Name + " is a " + pet.Species);
-                                break;
-                        case "3":
                             Console.WriteLine("What would you like to feed " + pet.Name + "?");
                             string food = Console.ReadLine();
                             if (random.Next(1, 100) < pet.Boredom)
@@ -171,18 +150,18 @@ namespace VirtualPet
                                 Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);
                             }
                             break;
-                        case "4":
+                        case "2":
                             pet.Play();
                             Console.WriteLine("You played with " + pet.Name);
                             Console.WriteLine(pet.Name + "s boredom level is " + pet.Boredom);
                             Console.WriteLine(pet.Name + "s health level is " + pet.Health);
                             Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);  
                             break;
-                        case "5":
+                        case "3":
                             pet.SeeDoctor();
                             Console.WriteLine("You took " + pet.Name + " to the doctor.");
                             break;
-                        case "6":
+                        case "4":
                             Console.WriteLine(pet.Name);
                             Console.WriteLine(pet.Species);
                             Console.WriteLine("Hunger: " + pet.Hunger);
@@ -190,7 +169,7 @@ namespace VirtualPet
                             Console.WriteLine("Health: " + pet.Health);
 
                             break;
-                        case "7":
+                        case "5":
                             Console.WriteLine("Thank you for playing with " + pet.Name + "!");
                             returnToOffice = true;
                             break;

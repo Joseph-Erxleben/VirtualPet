@@ -50,7 +50,7 @@ namespace VirtualPet.Tests
             testShelter.AddPet(newPet);
             testShelter.AddPet(newPet);
 
-            testShelter.RemovePet(newPet);
+            testShelter.RemovePet(0);
             Assert.Single(testShelter.ListofPets);
             
         }

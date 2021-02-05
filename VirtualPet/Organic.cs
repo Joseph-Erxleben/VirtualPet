@@ -7,6 +7,10 @@ namespace VirtualPet
     public class Organic : Pet
     {
         
+        public Organic()
+        {
+
+        }
         public Organic(string name, string species)
         {
             Name = name;
