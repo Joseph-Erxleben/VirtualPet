@@ -114,5 +114,18 @@ namespace VirtualPet
             Boredom += 5;
             Health -= 5;
         }
+
+        public virtual void GiveOil()
+        {
+
+        }
+
+        public virtual void PerformMaintenance()
+        {
+
+        }
+
+        public int Oil { get; set; }
+        public int Performance { get; set; }
     }
 }

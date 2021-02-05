@@ -38,7 +38,6 @@ namespace VirtualPet
 
                 if (userPet == petInList)
                 {
-                    Console.WriteLine(petInList + " has been adopted");
                     petIndex = i;
                 }
             }
@@ -51,7 +50,7 @@ namespace VirtualPet
         {
             for (int i = 0; i < ListofPets.Count; i++)
             {
-                Pet.Tick();
+                ListofPets[i].Tick();   
             }
         }
     } 

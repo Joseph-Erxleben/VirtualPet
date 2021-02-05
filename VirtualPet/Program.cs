@@ -74,6 +74,7 @@ namespace VirtualPet
 
                         else
                         {
+                            Console.WriteLine(shelter.ListofPets[userPetIndex].Name + " has been adopted.");
                             shelter.RemovePet(userPetIndex);
                         }
                         
@@ -153,7 +154,7 @@ namespace VirtualPet
                         {
                             if (shelter.ListofPets[i].IsOrganic == false)
                             {
-                                //shelter.ListofPets[i].GiveOil();
+                                shelter.ListofPets[i].GiveOil();
                             }
                         }
                         Console.WriteLine("You oiled the pets!");
@@ -183,7 +184,7 @@ namespace VirtualPet
                         {
                             if (shelter.ListofPets[i].IsOrganic == false)
                             {
-                                //shelter.ListofPets[i].PerformMaintanance();
+                                shelter.ListofPets[i].PerformMaintenance();
                             }
                         }
                         Console.WriteLine("You repaired the pets!");
@@ -192,7 +193,11 @@ namespace VirtualPet
                     case "6":
 
                         Console.WriteLine("What pet do you want to interact with?");
+                        string userPet = Console.ReadLine();
 
+                        int userPetIndex = shelter.SelectPet(userPet);
+
+                        SinglePet(userPetIndex);
 
                         break;
 
@@ -206,8 +211,8 @@ namespace VirtualPet
                             }
                             else if (shelter.ListofPets[i].IsOrganic == false)
                             {
-                                //Console.WriteLine($"{shelter.ListofPets[i].Name} the robotic {shelter.ListofPets[i].Species}- Oil: {shelter.ListofPets[i].Oil} " +
-                                    //$"Performance: {shelter.ListofPets[i].Performance} Boredom: {shelter.ListofPets[i].Boredom}");
+                                Console.WriteLine($"{shelter.ListofPets[i].Name} the robotic {shelter.ListofPets[i].Species}- Oil: {shelter.ListofPets[i].Oil} " +
+                                    $"Performance: {shelter.ListofPets[i].Performance} Boredom: {shelter.ListofPets[i].Boredom}");
                             }
                         }
                         break;
@@ -223,6 +228,7 @@ namespace VirtualPet
 
                 }
 
+                shelter.Tick();
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -230,69 +236,128 @@ namespace VirtualPet
 
 
                 
-                void SinglePet()
+                void SinglePet(int index)
+            {
+
+                bool returnToKennel = false;
+                while (returnToKennel == false)
                 {
-
-
+                    Console.Clear();
                     Console.WriteLine("What would you like to do?");
-                    Console.WriteLine("1. Name/Rename " + pet.Name);
-                    Console.WriteLine("2. Species/Set Species");
-                    Console.WriteLine("3. Feed " + pet.Name);
-                    Console.WriteLine("4. Play with " + pet.Name);
-                    Console.WriteLine("5. Take " + pet.Name + " to Doctor");
-                    Console.WriteLine("6. Check " + pet.Name + "'s status");
-                    Console.WriteLine("7. Return to Office");
-                
+                    Console.WriteLine("1. Name/Rename " + shelter.ListofPets[index].Name);
+                    Console.WriteLine("2. Change Species of " + shelter.ListofPets[index].Name);
+                    if (shelter.ListofPets[index].IsOrganic == true)
+                    {
+                        Console.WriteLine("3. Feed " + shelter.ListofPets[index].Name);
+                        Console.WriteLine("4. Play with " + shelter.ListofPets[index].Name);
+                        Console.WriteLine("5. Take " + shelter.ListofPets[index].Name + " to Doctor");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("3. Oil " + shelter.ListofPets[index].Name);
+                        Console.WriteLine("4. Play with " + shelter.ListofPets[index].Name);
+                        Console.WriteLine("5. Perform Maintenance on " + shelter.ListofPets[index].Name);
+                    }
+                    Console.WriteLine("6. Check " + shelter.ListofPets[index].Name + "'s status");
+                    Console.WriteLine("7. Return to Kennel");
+
                     playerChoice = Console.ReadLine();
 
                     switch (playerChoice)
                     {
                         case "1":
-                            Console.WriteLine("What would you like you to name your pet?");
-                            pet.Name = Console.ReadLine();
-                            Console.WriteLine("You named your pet " + pet.Name);
+                            Console.WriteLine("What would you like you to rename your pet?");
+                            shelter.ListofPets[index].Name = Console.ReadLine();
+                            Console.WriteLine("You named your pet " + shelter.ListofPets[index].Name);
                             break;
                         case "2":
-                            Console.WriteLine("What species do you want " + pet.Name + " to be?");
-                            pet.Species = Console.ReadLine();
-                            Console.WriteLine(pet.Name + " is a " + pet.Species);
-                                break;
+                            Console.WriteLine("What species do you want " + shelter.ListofPets[index].Name + " to be?");
+                            shelter.ListofPets[index].Species = Console.ReadLine();
+                            Console.WriteLine(shelter.ListofPets[index].Name + " is a " + shelter.ListofPets[index].Species);
+                            break;
                         case "3":
-                            Console.WriteLine("What would you like to feed " + pet.Name + "?");
-                            string food = Console.ReadLine();
-                            if (random.Next(1, 100) < pet.Boredom)
+
+                            if (shelter.ListofPets[index].IsOrganic == true)
                             {
-                                Console.WriteLine(pet.Name + " doesnt't want your food.");
+                                Console.WriteLine("What would you like to feed " + shelter.ListofPets[index].Name + "?");
+                                string food = Console.ReadLine();
+                                if (random.Next(1, 100) < shelter.ListofPets[index].Boredom)
+                                {
+                                    Console.WriteLine(shelter.ListofPets[index].Name + " doesnt't want your food.");
+                                }
+                                else
+                                {
+                                    pet.Feed(food.ToLower());
+                                    Console.WriteLine("You fed " + shelter.ListofPets[index].Name);
+                                    Console.WriteLine(shelter.ListofPets[index].Name + "s hunger level is " + shelter.ListofPets[index].Hunger);
+                                }
+
                             }
+
                             else
                             {
-                                pet.Feed(food.ToLower());
-                                Console.WriteLine("You fed " + pet.Name );
-                                Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);
+                                Console.WriteLine("You oiled " + shelter.ListofPets[index].Name);
+                                shelter.ListofPets[index].GiveOil();
+                                Console.WriteLine(shelter.ListofPets[index].Name + "'s oil level is " + shelter.ListofPets[index].Oil);
                             }
                             break;
                         case "4":
                             pet.Play();
-                            Console.WriteLine("You played with " + pet.Name);
-                            Console.WriteLine(pet.Name + "s boredom level is " + pet.Boredom);
-                            Console.WriteLine(pet.Name + "s health level is " + pet.Health);
-                            Console.WriteLine(pet.Name + "s hunger level is " + pet.Hunger);  
+                            Console.WriteLine("You played with " + shelter.ListofPets[index].Name);
+                            Console.WriteLine(shelter.ListofPets[index].Name + "s boredom level is " + shelter.ListofPets[index].Boredom);
+                            if (shelter.ListofPets[index].IsOrganic == true)
+                            {
+                            Console.WriteLine(shelter.ListofPets[index].Name + "s health level is " + shelter.ListofPets[index].Health);
+                            Console.WriteLine(shelter.ListofPets[index].Name + "s hunger level is " + shelter.ListofPets[index].Hunger);
+
+                            }
+
+                            else
+                            {
+                                Console.WriteLine(shelter.ListofPets[index].Name + "s oil level is " + shelter.ListofPets[index].Oil);
+                                Console.WriteLine(shelter.ListofPets[index].Name + "s performance level is " + shelter.ListofPets[index].Performance);
+
+                            }
                             break;
                         case "5":
-                            pet.SeeDoctor();
-                            Console.WriteLine("You took " + pet.Name + " to the doctor.");
+
+                            if (shelter.ListofPets[index].IsOrganic == true)
+                            {
+                                pet.SeeDoctor();
+                                Console.WriteLine("You took " + shelter.ListofPets[index].Name + " to the doctor.");
+                                Console.WriteLine(shelter.ListofPets[index].Name + "'s health is now " + shelter.ListofPets[index].Health);
+
+                            }
+                            else
+                            {
+                                pet.PerformMaintenance();
+                                Console.WriteLine("You performed maintenance on " + shelter.ListofPets[index].Name);
+                                Console.WriteLine(shelter.ListofPets[index].Name + "'s oil level is now " + shelter.ListofPets[index].Oil);
+                                Console.WriteLine(shelter.ListofPets[index].Name + "'s performance level is now " + shelter.ListofPets[index].Performance);
+                            }
                             break;
                         case "6":
-                            Console.WriteLine(pet.Name);
-                            Console.WriteLine(pet.Species);
-                            Console.WriteLine("Hunger: " + pet.Hunger);
-                            Console.WriteLine("Boredom: " + pet.Boredom);
-                            Console.WriteLine("Health: " + pet.Health);
+                            Console.WriteLine(shelter.ListofPets[index].Name);
+                            Console.WriteLine(shelter.ListofPets[index].Species);
+                            if (shelter.ListofPets[index].IsOrganic == true)
+                            {
+
+                                Console.WriteLine("Hunger: " + shelter.ListofPets[index].Hunger);
+                                Console.WriteLine("Health: " + shelter.ListofPets[index].Health);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Oil: " + shelter.ListofPets[index].Oil);
+                                Console.WriteLine("Performance: " + shelter.ListofPets[index].Performance);
+                            }
+                            Console.WriteLine("Boredom: " + shelter.ListofPets[index].Boredom);
 
                             break;
                         case "7":
-                            Console.WriteLine("Thank you for playing with " + pet.Name + "!");
-                            
+                            Console.WriteLine("Thank you for playing with " + shelter.ListofPets[index].Name + "!");
+                            returnToKennel = true;
+
                             break;
 
                         default:
@@ -300,74 +365,111 @@ namespace VirtualPet
                             break;
 
                     }
-               
+
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
-                       
+
                     Console.Clear();
-                    pet.Tick();
+                    shelter.ListofPets[index].Tick();
 
-                    if (pet.Health <= 0)
-                    {
-                        Console.WriteLine(pet.Name.ToUpper() + " HAS DIED! YOU LOSE! :(" );
-                  
-                        keepPlaying = false;
-                    }
-                    else if (pet.Hunger > 100)
-                    {
-                    
-                        pet.Hunger -= 10;
-                        Console.WriteLine(pet.Name + " got hungry and found some food on his own.");
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
-                    else if (pet.Boredom > 100)
-                    {
-                        pet.Boredom -= 10;
-                        Console.WriteLine(pet.Name + " got bored and found a toy to play with.");
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
+                    //if (shelter.ListofPets[index].Health <= 0)
+                    //{
+                    //    Console.WriteLine(shelter.ListofPets[index].Name.ToUpper() + " HAS DIED!");
 
-                    if (pet.Health <= 0)
-                    {
-                        Console.WriteLine(@"(\ _ /)");
-                        Console.WriteLine("(X - X)");
-                        Console.WriteLine("c(\")(\")");
-                    }
+                    //    returnToKennel = true;
+                    //}
 
-                    else if (pet.Health < 20)
-                    {
-                        Console.WriteLine(@"(\ _ /)");
-                        Console.WriteLine("(0 ~ 0)");
-                        Console.WriteLine("c(\")(\")");
-                    }
+                    //else if (shelter.ListofPets[index].Performance <= 0)
+                    //{
+                    //    Console.WriteLine(shelter.ListofPets[index].Name.ToUpper() + " HAS BROKEN!");
 
+                        
+                    //    returnToKennel = true;
+                    //}
 
-                    else if (pet.Boredom > 80)
-                    {
-                        Console.WriteLine(@"(\ _ /)");
-                        Console.WriteLine("(- X -)");
-                        Console.WriteLine("c(\")(\")");
-                    }
+                    //else if (shelter.ListofPets[index].Hunger > 100)
+                    //{
 
-                    else if (pet.Hunger > 80)
-                    {
-                        Console.WriteLine(@"(\ _ /)");
-                        Console.WriteLine("(' O ')");
-                        Console.WriteLine("c(\")(\")");
-                    }
+                    //    shelter.ListofPets[index].Hunger -= 10;
+                    //    Console.WriteLine(shelter.ListofPets[index].Name + " got hungry and found some food on their own.");
 
-                    else
-                    {
-                        Console.WriteLine(@"(\ _ /)");
-                        Console.WriteLine("(' X ')");
-                        Console.WriteLine("c(\")(\")");
-                    }
-               
+                    //}
+
+                    //else if (shelter.ListofPets[index].Oil < 0)
+                    //{
+                    //    shelter.ListofPets[index].Oil += 10;
+                    //    Console.WriteLine(shelter.ListofPets[index].Name + " got squeaky and found some oil on it's own.");
+                    //}
+
+                    //else if (shelter.ListofPets[index].Boredom > 100)
+                    //{
+                    //    shelter.ListofPets[index].Boredom -= 10;
+                    //    Console.WriteLine(shelter.ListofPets[index].Name + " got bored and found a toy to play with.");
+
+                    //}
+
+                    //if (shelter.ListofPets[index].Health <= 0)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(X - X)");
+                    //    Console.WriteLine("c(\")(\")");
+                    //    shelter.RemovePet(index);
+                    //}
+
+                    //else if (shelter.ListofPets[index].Performance <= 0)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(X - X)");
+                    //    Console.WriteLine("c(\")(\")");
+                    //    shelter.RemovePet(index);
+                    //}
+
+                    //else if (shelter.ListofPets[index].Health < 20)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(0 ~ 0)");
+                    //    Console.WriteLine("c(\")(\")");
+                    //}
+
+                    //else if (shelter.ListofPets[index].Performance <20)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(0 ~ 0)");
+                    //    Console.WriteLine("c(\")(\")");
+                    //}
+
+                    //else if (shelter.ListofPets[index].Boredom > 80)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(- X -)");
+                    //    Console.WriteLine("c(\")(\")");
+                    //}
+
+                    //else if (shelter.ListofPets[index].Hunger > 80)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(' O ')");
+                    //    Console.WriteLine("c(\")(\")");
+                    //}
+
+                    //else if (shelter.ListofPets[index].Oil < 20)
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(' O ')");
+                    //    Console.WriteLine("c(\")(\")");
+                    //}
+
+                    //else
+                    //{
+                    //    Console.WriteLine(@"(\ _ /)");
+                    //    Console.WriteLine("(' X ')");
+                    //    Console.WriteLine("c(\")(\")");
+                    //}
+                    //Console.ReadKey();
+
                 }
 
-
+                }
         
 
         }
