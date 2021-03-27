@@ -236,7 +236,7 @@ namespace VirtualPet
 
 
                 
-                void SinglePet(int index)
+            void SinglePet(int index)
             {
 
                 bool returnToKennel = false;
@@ -372,104 +372,9 @@ namespace VirtualPet
                     Console.Clear();
                     shelter.ListofPets[index].Tick();
 
-                    //if (shelter.ListofPets[index].Health <= 0)
-                    //{
-                    //    Console.WriteLine(shelter.ListofPets[index].Name.ToUpper() + " HAS DIED!");
-
-                    //    returnToKennel = true;
-                    //}
-
-                    //else if (shelter.ListofPets[index].Performance <= 0)
-                    //{
-                    //    Console.WriteLine(shelter.ListofPets[index].Name.ToUpper() + " HAS BROKEN!");
-
-                        
-                    //    returnToKennel = true;
-                    //}
-
-                    //else if (shelter.ListofPets[index].Hunger > 100)
-                    //{
-
-                    //    shelter.ListofPets[index].Hunger -= 10;
-                    //    Console.WriteLine(shelter.ListofPets[index].Name + " got hungry and found some food on their own.");
-
-                    //}
-
-                    //else if (shelter.ListofPets[index].Oil < 0)
-                    //{
-                    //    shelter.ListofPets[index].Oil += 10;
-                    //    Console.WriteLine(shelter.ListofPets[index].Name + " got squeaky and found some oil on it's own.");
-                    //}
-
-                    //else if (shelter.ListofPets[index].Boredom > 100)
-                    //{
-                    //    shelter.ListofPets[index].Boredom -= 10;
-                    //    Console.WriteLine(shelter.ListofPets[index].Name + " got bored and found a toy to play with.");
-
-                    //}
-
-                    //if (shelter.ListofPets[index].Health <= 0)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(X - X)");
-                    //    Console.WriteLine("c(\")(\")");
-                    //    shelter.RemovePet(index);
-                    //}
-
-                    //else if (shelter.ListofPets[index].Performance <= 0)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(X - X)");
-                    //    Console.WriteLine("c(\")(\")");
-                    //    shelter.RemovePet(index);
-                    //}
-
-                    //else if (shelter.ListofPets[index].Health < 20)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(0 ~ 0)");
-                    //    Console.WriteLine("c(\")(\")");
-                    //}
-
-                    //else if (shelter.ListofPets[index].Performance <20)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(0 ~ 0)");
-                    //    Console.WriteLine("c(\")(\")");
-                    //}
-
-                    //else if (shelter.ListofPets[index].Boredom > 80)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(- X -)");
-                    //    Console.WriteLine("c(\")(\")");
-                    //}
-
-                    //else if (shelter.ListofPets[index].Hunger > 80)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(' O ')");
-                    //    Console.WriteLine("c(\")(\")");
-                    //}
-
-                    //else if (shelter.ListofPets[index].Oil < 20)
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(' O ')");
-                    //    Console.WriteLine("c(\")(\")");
-                    //}
-
-                    //else
-                    //{
-                    //    Console.WriteLine(@"(\ _ /)");
-                    //    Console.WriteLine("(' X ')");
-                    //    Console.WriteLine("c(\")(\")");
-                    //}
-                    //Console.ReadKey();
-
                 }
 
-                }
+            }
         
 
         }

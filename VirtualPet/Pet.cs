@@ -15,8 +15,6 @@ namespace VirtualPet
 
         public Pet()
         {
-           //Name = "your pet";
-           // Species = "animal";
             Hunger = 50;
             Boredom = 60;
             Health = 30;
